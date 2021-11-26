@@ -20,7 +20,6 @@
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/journal">Journal Voucher Entry</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/trial-balance">Trial Balance</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/system-user">System Users</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Chart of Accounts</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Reports</a>
                 </div>
             </div>
@@ -37,10 +36,9 @@
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Settings</a>
                                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="#!">Action</a>
-                                        <a class="dropdown-item" href="#!">Another action</a>
+                                        <a class="dropdown-item" href="#!">Manage account</a>
                                         <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#!">Something else here</a>
+                                        <a class="dropdown-item" href="#!">Log out</a>
                                     </div>
                                 </li>
                             </ul>
@@ -49,12 +47,12 @@
                 </nav>
                 <!-- Page content-->
                 <div class="container-fluid">
-                    <h1 class="mt-4">Trial Balance</h1>
+                    <h1 class="mt-4">User Management</h1>
                     <div class="padded">
                         <div class="box-nav d-flex justify-between">
                           <a href="/add_trans" class="border-shadow">
-                              <span class ="text-gradient"><img src="../svg/add-doc.svg" alt="file icon" class="icon2" width='25px' height='25px' text-decoration:"none"> Create New</span>
-                              <span class ="text-gradient"><img src="../svg/add-doc.svg" alt="file icon" class="icon2" width='25px' height='25px' text-decoration:"none"> Delete Account</span>
+                              <span class ="text-gradient"><img src="../svg/add-doc.svg" alt="file icon" class="icon2" width='25px' height='25px' text-decoration:"none"> Add user</span>
+                              <span class ="text-gradient"><img src="../svg/add-doc.svg" alt="file icon" class="icon2" width='25px' height='25px' text-decoration:"none"> Delete user</span>
                           </a>
                       </div>
                       
@@ -71,98 +69,100 @@
                         </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                              <td>Cash & Cash Equivalent</td>
-                              <td>PHP 0</td>
-                              <td>PHP 0</td>
+                            <tr>
+                                <td>Cash & Cash Equivalent</td>
+                                <td>0</td>
+                                <td>0</td>
+                             </tr>
+                             <tr>
+                              <td>Accounts Receivable</td>
+                              <td>0</td>
+                              <td>0</td>
                            </tr>
                            <tr>
-                            <td>Accounts Receivable</td>
-                            <td>PHP 0</td>
-                            <td>PHP 0</td>
-                         </tr>
-                         <tr>
-                            <td>Inventory</td>
-                            <td>PHP 0</td>
-                            <td>PHP 0</td>
-                         </tr>
-                         <tr>
-                            <td>Prepaid Assets</td>
-                            <td>PHP 0</td>
-                            <td>PHP 0</td>
-                         </tr>
-                         <tr>
-                            <td>Property, Plant & Equipment</td>
-                            <td>PHP 0</td>
-                            <td>PHP 0</td>
-                         </tr>
-                         <tr>
-                            <td>Investment</td>
-                            <td>PHP 0</td>
-                            <td>PHP 0</td>
-                         </tr>
-                         <tr>
-                            <td>Notes Receivable</td>
-                            <td>PHP 0</td>
-                            <td>PHP 0</td>
-                         </tr>
-                         <tr>
-                            <td>Intangible Asset</td>
-                            <td>PHP 0</td>
-                            <td>PHP 0</td>
-                         </tr>
-                         <tr>
-                            <td>Deferred Tax Asset</td>
-                            <td>PHP 0</td>
-                            <td>PHP 0</td>
-                         </tr>
-                         <tr>
-                            <td>Accounts Payable</td>
-                            <td>PHP 0</td>
-                            <td>PHP 0</td>
-                         </tr>
-                         <tr>
-                            <td>Salaries Payable</td>
-                            <td>PHP 0</td>
-                            <td>PHP 0</td>
-                         </tr>
-                         <tr>
-                            <td>Interest Payable</td>
-                            <td>PHP 0</td>
-                            <td>PHP 0</td>
-                         </tr>
-                         <tr>
-                            <td>Notes Payable</td>
-                            <td>PHP 0</td>
-                            <td>PHP 0</td>
-                         </tr>
-                         <tr>
-                            <td>Other Payable</td>
-                            <td>PHP 0</td>
-                            <td>PHP 0</td>
-                         </tr>
-                         <tr>
-                            <td>Taxes</td>
-                            <td>PHP 0</td>
-                            <td>PHP 0</td>
-                         </tr>
-                         <tr>
-                            <td>Other Payable</td>
-                            <td>PHP 0</td>
-                            <td>PHP 0</td>
-                         </tr>
+                              <td>Inventory</td>
+                              <td>0</td>
+                              <td>0</td>
+                           </tr>
+                           <tr>
+                              <td>Prepaid Assets</td>
+                              <td>0</td>
+                              <td>0</td>
+                           </tr>
+                           <tr>
+                              <td>Property, Plant & Equipment</td>
+                              <td>0</td>
+                              <td>0</td>
+                           </tr>
+                           <tr>
+                              <td>Investment</td>
+                              <td>0</td>
+                              <td>0</td>
+                           </tr>
+                           <tr>
+                              <td>Notes Receivable</td>
+                              <td>0</td>
+                              <td>0</td>
+                           </tr>
+                           <tr>
+                              <td>Intangible Asset</td>
+                              <td>0</td>
+                              <td>0</td>
+                           </tr>
+                           <tr>
+                              <td>Deferred Tax Asset</td>
+                              <td>0</td>
+                              <td>0</td>
+                           </tr>
+                           <tr>
+                              <td>Accounts Payable</td>
+                              <td>0</td>
+                              <td>0</td>
+                           </tr>
+                           <tr>
+                              <td>Salaries Payable</td>
+                              <td>0</td>
+                              <td>0</td>
+                           </tr>
+                           <tr>
+                              <td>Interest Payable</td>
+                              <td>0</td>
+                              <td>0</td>
+                           </tr>
+                           <tr>
+                              <td>Notes Payable</td>
+                              <td>0</td>
+                              <td>0</td>
+                           </tr>
+                           <tr>
+                              <td>Other Payable</td>
+                              <td>0</td>
+                              <td>0</td>
+                           </tr>
+                           <tr>
+                              <td>Taxes</td>
+                              <td>0</td>
+                              <td>0</td>
+                           </tr>
+                           <tr>
+                              <td>Other Payable</td>
+                              <td>0</td>
+                              <td>0</td>
+                           </tr>
                         </tbody>
+                        <tfoot>
+                            <tr>
+                                <td></td>
+                                <td>Total: 0</td>
+                                <td>Total: 0</td>
+                            </tr>
+                        </tfoot>
                       </table>
                       </form>
                       </main>
                       
                       </br>
                       </br>
-                      
-                      <div class="padded">
-                      <button type="button" style="height:25px; width:100px" onclick="alert('Extracting Report...jk')">EXTRACT</button>
-                      <button type="button" style="height:25px; width:100px" onclick="alert('Generating Report...jk')">GENERATE</button>
-                      </div>
                 </div>
             </div>
         </div>
