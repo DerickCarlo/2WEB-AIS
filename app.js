@@ -38,3 +38,6 @@ app.get('/trial-balance', function(req, res) {
 app.get('/system-user', function(req, res) {
     res.render('sys-users');
 });
+app.get('/coa', function(req, res) {
+    res.render('chart-of-accounts');
+});

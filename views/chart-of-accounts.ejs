@@ -5,13 +5,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>WEB-AIS - System Users</title>
+        <title>WEB-AIS - Chart of Accounts</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="../assets/favicon.ico" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="../css/styles.css" rel="stylesheet" />
-       <!-- Search feature-->
-       <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
     </head>
     <body>
         <div class="d-flex" id="wrapper">
@@ -50,49 +48,94 @@
                 </nav>
                 <!-- Page content-->
                 <div class="container-fluid">
-                    <h1 class="mt-4">User Management</h1>
+                    <h1 class="mt-4">Trial Balance</h1>
                     <div class="padded">
                         <div class="box-nav d-flex justify-between">
                           <a href="/add_trans" class="border-shadow">
-                              <span class ="text-gradient"><img src="../svg/add-doc.svg" alt="file icon" class="icon2" width='25px' height='25px' text-decoration:"none"> Add user</span>
-                              <span class ="text-gradient"><img src="../svg/add-doc.svg" alt="file icon" class="icon2" width='25px' height='25px' text-decoration:"none"> Delete user</span>
+                              <span class ="text-gradient"><img src="../svg/add-doc.svg" alt="file icon" class="icon2" width='25px' height='25px' text-decoration:"none"> Create New Account</span>
                           </a>
                       </div>
                       
                       </div>
-                      <table class="table" id="users">
+                        
+                      
+                      <form action ="/" method="POST">
+                      <table class="table">
                         <thead class="thead-dark">
                         <tr>
-                            <td><strong>ID</strong></td>
-                            <td><strong>Name</strong></td>
-                            <td><strong>E-mail</strong></td>
-                            <td><strong>Role</strong></td>
-                            <td><strong>Action</strong></td>
+                            <td><strong>CLASSIFICATION</strong></td>
+                            <td><strong>ACCOUNT NAME</strong></td>
+                            <td><strong>CODE</strong></td>   
+                            <td><strong>MAPPING</strong></td>   
                         </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                              <td>1</td>
-                              <td>dummy User1</td>
-                              <td>dummy1email@edu.co</td>
-                              <td>Supervisor</td>
-                              <td>
-                                <a href=# class="btn border-shadow delete">
-                                    <span class="text-gradient"><img src="../svg/trash-alt-regular.svg" alt="trash icon" class="icon3" width='25px' height='25px'></span>
-                                </a>
-                            </td>
-                           </tr>
-                           <tr>
-                            <td>2</td>
-                            <td>dummy User2</td>
-                            <td>dummy2email@edu.co</td>
-                            <td>Manager</td>
-                            <td>
-                                <a href=# class="btn border-shadow delete">
-                                    <span class="text-gradient"><img src="../svg/trash-alt-regular.svg" alt="trash icon" class="icon3" width='25px' height='25px'></span>
-                                </a>
-                            </td>
-                         </tr>
+                            <tr>
+                                <td>Asset</td>
+                                <td>Cash in Bank - Operating</td>
+                                <td>10101</td>
+                                <td>Cash & Cash Equivalent</td>
+                            </tr>
+                            <tr>
+                                <td>Asset</td>
+                                <td>Cash in Bank - Investment</td>
+                                <td>10102</td>
+                                <td>Cash & Cash Equivalent</td>
+                            </tr>
+                            <tr>
+                                <td>Asset</td>
+                                <td>Cash on Hand - Local Currency</td>
+                                <td>10103</td>
+                                <td>Cash & Cash Equivalent</td>
+                            </tr>
+                            <tr>
+                                <td>Asset</td>
+                                <td>Cash on Hand - Foreign Currency</td>
+                                <td>10104</td>
+                                <td>Cash & Cash Equivalent</td>
+                            </tr>
+                            <tr>
+                                <td>Liability</td>
+                                <td>Accounts Payable - Trade</td>
+                                <td>20101</td>
+                                <td>Accounts Payable</td>
+                            </tr>
+                            <tr>
+                                <td>Liability</td>
+                                <td>Accounts Payable - Non Trade</td>
+                                <td>20102</td>
+                                <td>Accounts Payable</td>
+                            </tr>
+                            <tr>
+                                <td>Liability</td>
+                                <td>Accounts Payable - Related Parties</td>
+                                <td>20103</td>
+                                <td>Accounts Payable</td>
+                            </tr>
+                            <tr>
+                                <td>Equity</td>
+                                <td>Ordinary Share Capital</td>
+                                <td>30102</td>
+                                <td>Subscribed Ordinary Share</td>
+                            </tr>
+                            <tr>
+                                <td>Income</td>
+                                <td>Interest Income</td>
+                                <td>40201</td>
+                                <td>Interest Income</td>
+                            </tr>
+                            <tr>
+                                <td>Expense</td>
+                                <td>Marketing Expense</td>
+                                <td>50209</td>
+                                <td>Sales & Marketing</td>
+                            </tr>
+                            <tr>
+                                <td>Expense</td>
+                                <td>Insurance Expense</td>
+                                <td>50209</td>
+                                <td>Insurance</td>
+                            </tr>
                         </tbody>
                       </table>
                       </form>
@@ -107,15 +150,5 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="../js/scripts.js"></script>
-        <!-- search user libraries-->
-        <script src="../js/dateRangeFilter.js"></script>
-        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-        <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
-        <script src="https://cdn.datatables.net/datetime/1.1.1/js/dataTables.dateTime.min.js"></script>
-        <!--Search user FUNCTION-->
-        <script>
-     // DataTables initialisation
-     var table = $('#users').DataTable();
-        </script>
+    </body>
 </html>
