@@ -41,3 +41,7 @@ app.get('/system-user', function(req, res) {
 app.get('/coa', function(req, res) {
     res.render('chart-of-accounts');
 });
+app.get('/tax-report', function(req, res) {
+    res.render('tax-rep');
+});
+
