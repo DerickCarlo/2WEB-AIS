@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>WEB-AIS  Trial Balance</title>
+        <title>OTIBS - Trial Balance</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="../assets/favicon.ico" />
         <!-- Core theme CSS (includes Bootstrap)-->
@@ -21,101 +21,66 @@
                 <%- include ( "top-navigation" ); -%>
                 <!-- Page content-->
                 <div class="container-fluid">
-                    <h1 class="mt-4">Trial Balance</h1>
+                    <h1 class="mt-4">General Ledger</h1>
                       <form action ="/" method="POST">
                       <table class="table">
                         <thead class="thead-dark">
+                           <center>DEBIT</center>
                         <tr>
-                            <td><strong>ACCOUNT</strong></td>
-                            <td><strong>DEBIT</strong></td>
-                            <td><strong>CREDIT</strong></td>   
+                           <th><strong>DATE</strong></th>
+                           <th><strong>ACCOUNT NAME</strong></th>
+                           <th><strong>DESCRIPTION</strong></th>
+                           <th><strong>DEBIT</strong></th>
+                           <th><strong>CREDIT</strong></th>   
+                           <th><strong>AMOUNT DEBITED PER ACCOUNT NAME</strong></th>
+                           <th><strong>TOTAL BALANCE OF DEBIT</strong></th>
                         </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Cash & Cash Equivalent</td>
-                                <td>0</td>
-                                <td>0</td>
-                             </tr>
-                             <tr>
-                              <td>Accounts Receivable</td>
-                              <td>0</td>
-                              <td>0</td>
-                           </tr>
-                           <tr>
-                              <td>Prepaid Assets</td>
-                              <td>0</td>
-                              <td>0</td>
-                           </tr>
-                           <tr>
-                              <td>Property, Plant & Equipment</td>
-                              <td>0</td>
-                              <td>0</td>
-                           </tr>
-                           <tr>
-                              <td>Investment</td>
-                              <td>0</td>
-                              <td>0</td>
-                           </tr>
-                           <tr>
-                              <td>Notes Receivable</td>
-                              <td>0</td>
-                              <td>0</td>
-                           </tr>
-                           <tr>
-                              <td>Intangible Asset</td>
-                              <td>0</td>
-                              <td>0</td>
-                           </tr>
-                           <tr>
-                              <td>Deferred Tax Asset</td>
-                              <td>0</td>
-                              <td>0</td>
-                           </tr>
-                           <tr>
-                              <td>Accounts Payable</td>
-                              <td>0</td>
-                              <td>0</td>
-                           </tr>
-                           <tr>
-                              <td>Salaries Payable</td>
-                              <td>0</td>
-                              <td>0</td>
-                           </tr>
-                           <tr>
-                              <td>Interest Payable</td>
-                              <td>0</td>
-                              <td>0</td>
-                           </tr>
-                           <tr>
-                              <td>Notes Payable</td>
-                              <td>0</td>
-                              <td>0</td>
-                           </tr>
-                           <tr>
-                              <td>Other Payable</td>
-                              <td>0</td>
-                              <td>0</td>
-                           </tr>
-                           <tr>
-                              <td>Taxes</td>
-                              <td>0</td>
-                              <td>0</td>
-                           </tr>
-                           <tr>
-                              <td>Other Payable</td>
-                              <td>0</td>
-                              <td>0</td>
-                           </tr>
+                            
                         </tbody>
                         <tfoot>
                             <tr>
                                 <td></td>
+                                <td></td>
+                                <td></td>
                                 <td>Total: 0</td>
                                 <td>Total: 0</td>
+                                <td></td>
+                                <td></td>
                             </tr>
                         </tfoot>
                       </table>
+
+                      <table class="table">
+                        <thead class="thead-dark">
+                           <center>CREDIT</center>
+                        <tr>
+                           <th><strong>DATE</strong></th>
+                           <th><strong>ACCOUNT NAME</strong></th>
+                           <th><strong>DESCRIPTION</strong></th>
+                           <th><strong>DEBIT</strong></th>
+                           <th><strong>CREDIT</strong></th>   
+                           <th><strong>AMOUNT CREDITED PER ACCOUNT NAME</strong></th>
+                           <th><strong>TOTAL BALANCE OF CREDIT</strong></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>Total: 0</td>
+                                <td>Total: 0</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tfoot>
+                      </table>
+
                       </form>
                       </main>
                       
