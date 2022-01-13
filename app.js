@@ -4,6 +4,8 @@ const bodyParser = require('body-parser');
 const fs = require('fs');
 const express = require('express');
 const { off } = require('process');
+var https = require('follow-redirects').https;
+
 
 //express app
 const app = express();
@@ -44,4 +46,9 @@ app.get('/coa', function(req, res) {
 app.get('/tax-report', function(req, res) {
     res.render('tax-rep');
 });
+app.get('/test-area', function(req, res) {
+    res.render('test');
+});
+
+
 
