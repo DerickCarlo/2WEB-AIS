@@ -86,6 +86,7 @@ con.query(
 
 //webpage routes
 
+/* Logout */
 app.get("/logout", function (req, res) {
   req.session.destroy((err) => {
     if (err) throw err;
@@ -93,6 +94,7 @@ app.get("/logout", function (req, res) {
   });
 });
 
+/* Login */
 app.get("/", notAuth, function (req, res) {
   res.render("land");
 });
@@ -116,18 +118,17 @@ app.post("/", notAuth, function (req, res) {
       } else {
         req.session.isAuth = true;
 
-        if (result[0].role == "pao") {
-          req.session.user = "pao";
-        }
         if (result[0].role == "admin") {
           req.session.user = "admin";
-        }
+        } else req.session.user = "regular";
+
         res.redirect("/home");
       }
     }
   );
 });
 
+/* Register */
 app.get("/register", function (req, res) {
   res.render("register");
 });
@@ -162,19 +163,24 @@ app.post("/register", function (req, res) {
   );
 });
 
-app.get("/home", isAuth, requireRole("admin"), function (req, res) {
+/* Home */
+app.get("/home", isAuth, theseRoles(), function (req, res) {
+  console.log(req.session.user);
   res.render("home");
 });
 
-app.get("/journal", function (req, res) {
+/* Journal */
+app.get("/journal", isAuth, theseRoles(), function (req, res) {
   res.render("journal-entry");
 });
 
-app.get("/trial-balance", function (req, res) {
+/* Trial Balance */
+app.get("/trial-balance", isAuth, theseRoles(), function (req, res) {
   res.render("trial-balance");
 });
 
-app.get("/system-user", function (req, res) {
+/* System user */
+app.get("/system-user", isAuth, requireRole("admin"), function (req, res) {
   con.query("SELECT * FROM users", (err, result) => {
     if (err) throw err;
     console.log("query successful");
@@ -183,7 +189,8 @@ app.get("/system-user", function (req, res) {
   });
 });
 
-app.get("/coa", function (req, res) {
+/* COA */
+app.get("/coa", isAuth, theseRoles("regular", "admin"), function (req, res) {
   con.query("SELECT * FROM  coa", (err, result) => {
     if (err) throw err;
     console.log("query successful");
@@ -192,9 +199,15 @@ app.get("/coa", function (req, res) {
   });
 });
 
-app.get("/tax-report", function (req, res) {
-  res.render("tax-rep");
-});
+/* Tax report */
+app.get(
+  "/tax-report",
+  isAuth,
+  theseRoles("regular", "admin"),
+  function (req, res) {
+    res.render("tax-rep");
+  }
+);
 
 //initializing ports
 const PORT = process.env.PORT || 5000;
