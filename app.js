@@ -67,7 +67,13 @@ app.get("/system-user", function (req, res) {
   res.render("sys-users");
 });
 app.get("/coa", function (req, res) {
-  res.render("chart-of-accounts");
+  con.query("SELECT * FROM users", (err, result) => {
+    if (err) throw err;
+    result = result[0];
+    console.log("query successful");
+    console.log(result.length);
+    res.render("chart-of-accounts", { data: result });
+  });
 });
 app.get("/tax-report", function (req, res) {
   res.render("tax-rep");
