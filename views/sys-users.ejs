@@ -43,28 +43,19 @@
                         </tr>
                         </thead>
                         <tbody>
+                        <% for(var i = 0; i < data.length; i++) {%>
                           <tr>
-                              <td>1</td>
-                              <td>dummy User1</td>
-                              <td>dummy1email@edu.co</td>
-                              <td>Supervisor</td>
+                              <td><%= data[i].id %></td>
+                              <td><%= data[i].name %></td>
+                              <td><%= data[i].email %></td>
+                              <td><%= data[i].role %></td>
                               <td>
                                 <a href=# class="btn border-shadow delete">
                                     <span class="text-gradient"><img src="../svg/trash-alt-regular.svg" alt="trash icon" class="icon3" width='25px' height='25px'></span>
                                 </a>
                             </td>
                            </tr>
-                           <tr>
-                            <td>2</td>
-                            <td>dummy User2</td>
-                            <td>dummy2email@edu.co</td>
-                            <td>Manager</td>
-                            <td>
-                                <a href=# class="btn border-shadow delete">
-                                    <span class="text-gradient"><img src="../svg/trash-alt-regular.svg" alt="trash icon" class="icon3" width='25px' height='25px'></span>
-                                </a>
-                            </td>
-                         </tr>
+                        <% } %>
                         </tbody>
                       </table>
                       </form>

@@ -7,11 +7,11 @@
       src="https://kit.fontawesome.com/64d58efce2.js"
       crossorigin="anonymous"
     ></script>
-    <link rel="stylesheet" href="../css/land.css" /> 
+    <link rel="stylesheet" href="../css/land.css" />
     <title>Sign in & Sign up Form</title>
   </head>
   <body>
-    <div class="container">
+    <!--     <div class="container">
       <div class="forms-container">
         <div class="signin-signup">
           <form action="/home" class="sign-in-form" method="GET">
@@ -85,7 +85,20 @@
           <img src="img/register.svg" class="image" alt="" />
         </div>
       </div>
-    </div>
+    </div> -->
+
+    <form action="/" method="POST">
+      <div class="username">
+        <input type="text " id="email" name="email" required />
+        <label for="email ">email:</label>
+      </div>
+
+      <div class="password">
+        <input type="password" id="password " name="password" required />
+        <label for="password ">Password:</label>
+      </div>
+      <button type="submit"><span>Login</span></button>
+    </form>
   </body>
   <script src="../js/land.js"></script>
 </html>
