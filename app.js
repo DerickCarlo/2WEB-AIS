@@ -41,6 +41,15 @@ con.connect((err) => {
   }
 });
 
+con.query(
+  "INSERT INTO users (classification, accountName, code, mapping, description, normalBalance, action) VALUES (?,?,?,?,?,?,?);",
+  [1, 2, 3, 4, 5, 6, 7],
+  (err, result) => {
+    if (err) throw err;
+    console.log("inserted");
+  }
+);
+
 //webpage routes
 app.get("/", function (req, res) {
   res.render("land");
