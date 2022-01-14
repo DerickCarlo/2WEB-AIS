@@ -57,97 +57,17 @@
                         </tr>
                         </thead>
                         <tbody>
+                            <% for(var i = 0; i < data.length; i++) {%>
                             <tr>
-                                <td><%= data.classification %></td>
-                                <td>Cash in Bank - Operating</td>
-                                <td>10101</td>
-                                <td>Cash & Cash Equivalent</td>
-                                <td>aaaa</td>
-                                <td>DEBIT</td>
+                                <td><%= data[i].classification %></td>
+                                <td><%= data[i].accountName %></td>
+                                <td><%= data[i].code %></td>
+                                <td><%= data[i].mapping %></td>
+                                <td><%= data[i].description %></td>
+                                <td><%= data[i].normalBalance %></td>
+                                <td><%= data[i].action %></td>
                             </tr>
-                            <tr>
-                                <td>Asset</td>
-                                <td>Cash in Bank - Investment</td>
-                                <td>10102</td>
-                                <td>Cash & Cash Equivalent</td>
-                                <td>aaaa</td>
-                                <td>CREDIT</td>
-                            </tr>
-                            <tr>
-                                <td>Asset</td>
-                                <td>Cash on Hand - Local Currency</td>
-                                <td>10103</td>
-                                <td>Cash & Cash Equivalent</td>
-                                <td>aaaa</td>
-                                <td>DEBIT</td>
-                            </tr>
-                            <tr>
-                                <td>Asset</td>
-                                <td>Cash on Hand - Foreign Currency</td>
-                                <td>10104</td>
-                                <td>Cash & Cash Equivalent</td>
-                                <td>aaaa</td>
-                                <td>DEBIT</td>
-                            </tr>
-                            <tr>
-                                <td>Liability</td>
-                                <td>Accounts Payable - Trade</td>
-                                <td>20101</td>
-                                <td>Accounts Payable</td>
-                                <td>aaaa</td>
-                                <td>CREDIT</td>
-                            </tr>
-                            <tr>
-                                <td>Liability</td>
-                                <td>Accounts Payable - Non Trade</td>
-                                <td>20102</td>
-                                <td>Accounts Payable</td>
-                                <td>aaaa</td>
-                                <td>CREDIT</td>
-                            </tr>
-                            <tr>
-                                <td>Liability</td>
-                                <td>Accounts Payable - Related Parties</td>
-                                <td>20103</td>
-                                <td>Accounts Payable</td>
-                                <td>aaaa</td>
-                                <td>CREDIT</td>
-                            </tr>
-                            <tr>
-                                <td>Equity</td>
-                                <td>Ordinary Share Capital</td>
-                                <td>30102</td>
-                                <td>Subscribed Ordinary Share</td>
-                                <td>aaaaa</td>
-                                <td>CREDIT</td>
-                            </tr>
-                            <tr>
-                                <td>Income</td>
-                                <td>Interest Income</td>
-                                <td>40201</td>
-                                <td>Interest Income</td>
-                                <td>aaaaaa</td>
-                                <td>DEBIT</td>
-                            </tr>
-                            <tr>
-                                <td>Expense</td>
-                                <td>Marketing Expense</td>
-                                <td>50209</td>
-                                <td>Sales & Marketing</td>
-                                <td>aaaaaa</td>
-                                <td>CREDIT</td>
-                            </tr>
-                            <tr>
-                                <td>Expense</td>
-                                <td>Insurance Expense</td>
-                                <td>50209</td>
-                                <td>Insurance</td>
-                                <td>aaaaaa</td>
-                                <td>CREDIT</td>
-                                
-                            </tr>
-
-                            
+                            <% } %>
                         </tbody>
                       </table>
                       </form>
