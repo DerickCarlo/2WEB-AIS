@@ -74,6 +74,7 @@ con.connect((err) => {
     console.log(err);
   }
 });
+
 /* 
 con.query(
   "INSERT INTO coa (classification, accountName, code, mapping, description, normalBalance, action) VALUES (?,?,?,?,?,?,?);",
@@ -84,6 +85,7 @@ con.query(
   }
 );
  */
+
 //webpage routes
 
 /* Logout */
@@ -106,7 +108,7 @@ app.post("/", notAuth, function (req, res) {
     [email],
     async (err, result) => {
       if (err) throw err;
-      if (result.length == 0) {
+      /* if (result.length == 0) {
         console.log("email does not exist");
         res.redirect("/");
       }
@@ -123,6 +125,29 @@ app.post("/", notAuth, function (req, res) {
         } else req.session.user = "regular";
 
         res.redirect("/home");
+      } */
+
+      if (result.length == 0) {
+        /* email not in database */
+        console.log("email does not exist");
+        res.redirect("/");
+      } else {
+        /* else then it does exist then */
+        userPassword = result[0].password;
+        var isMatch = await bcrypt.compare(password, userPassword);
+        if (!isMatch) {
+          /* Then if its not a match */
+          console.log("password is wrong");
+          res.redirect("/");
+        } else {
+          /* if its a match */
+          req.session.isAuth = true;
+          req.session.name = result[0].name;
+          if (result[0].role == "admin") {
+            req.session.user = "admin";
+          } else req.session.user = "regular";
+          res.redirect("/home");
+        }
       }
     }
   );
