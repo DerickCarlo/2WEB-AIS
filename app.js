@@ -13,8 +13,8 @@ const { off } = require("process");
 const mysql2 = require("mysql2");
 const { brotliDecompress } = require("zlib");
 const bcrypt = require("bcrypt");
-const nodemailer = require('nodemailer');
-const jwt  = require('jsonwebtoken');
+const nodemailer = require("nodemailer");
+const jwt = require("jsonwebtoken");
 const {
   isAuth,
   requireRole,
@@ -23,11 +23,11 @@ const {
 } = require("./js/middlewares");
 
 const transporter = nodemailer.createTransport({
-    service:"gmail",
-    auth:{
-      user: process.env.userEmailRecovery,
-      pass: process.env.passEmailRecovery
-    }
+  service: "gmail",
+  auth: {
+    user: process.env.userEmailRecovery,
+    pass: process.env.passEmailRecovery,
+  },
 });
 //express app
 const app = express();
@@ -112,6 +112,7 @@ app.get("/", notAuth, function (req, res) {
 
 app.post("/", notAuth, function (req, res) {
   var { email, password } = req.body;
+  console.log(req.body);
   con.query(
     "SELECT * FROM users WHERE email=?",
     [email],
@@ -123,6 +124,7 @@ app.post("/", notAuth, function (req, res) {
         res.redirect("/");
       } else {
         /* else then it does exist then */
+        console.log(result[0]);
         userPassword = result[0].password;
         var isMatch = await bcrypt.compare(password, userPassword);
         if (!isMatch) {
@@ -217,7 +219,7 @@ app.get("/system-user", isAuth, requireRole("admin"), function (req, res) {
 });
 
 /* COA */
-app.get("/coa", isAuth, theseRoles("regular", "admin"), function (req, res) {
+app.get("/coa", isAuth, theseRoles(), function (req, res) {
   con.query("SELECT * FROM  coa", (err, result) => {
     if (err) throw err;
     res.render("chart-of-accounts", {
@@ -236,99 +238,93 @@ app.get(
   function (req, res) {
     res.render("tax-rep", {
       username: req.session.name,
-      role: req.session.user
+      role: req.session.user,
     });
   }
 );
 
-const JWT_SECRET = 'some super secret...';
+const JWT_SECRET = "some super secret...";
 
-app.get('/', (req, res) => {
-    res.send('Hello world');
+app.get("/", (req, res) => {
+  res.send("Hello world");
 });
 
-app.get('/forgot-password', (req, res, next) =>{
-    res.render('forgot-password');
+app.get("/forgot-password", (req, res, next) => {
+  res.render("forgot-password");
 });
 
-app.post('/forgot-password', (req, res, next) =>{
-    const { email } = req.body;
-   
+app.post("/forgot-password", (req, res, next) => {
+  const { email } = req.body;
 
-
-
-if(email !== user.email){
+  if (email !== user.email) {
     res.send("user not registered");
     return;
-};
+  }
 
-const secret = JWT_SECRET + user.password;
-const payload = {
+  const secret = JWT_SECRET + user.password;
+  const payload = {
     email: user.email,
-    id: user.id
-};
-const token = jwt.sign(payload, secret, {expiresIn: '15mins'});
-const link = `http://localhost:5000/reset-password/${user.id}/${token}`;
-//console.log(link);
+    id: user.id,
+  };
+  const token = jwt.sign(payload, secret, { expiresIn: "15mins" });
+  const link = `http://localhost:5000/reset-password/${user.id}/${token}`;
+  //console.log(link);
 
-const options = {
+  const options = {
     from: process.env.userEmailRecovery,
     to: user.email,
     subject: "password recovery link",
-    text: "requested password link: " + link
-}
+    text: "requested password link: " + link,
+  };
 
-transporter.sendMail(options, function(err, info) {
-    if(err){
-        console.log(err);
-        return;
-    }else{
-        console.log("sent: " + info.response);
+  transporter.sendMail(options, function (err, info) {
+    if (err) {
+      console.log(err);
+      return;
+    } else {
+      console.log("sent: " + info.response);
     }
+  });
+
+  res.render("reset-confirmation");
 });
-    
-res.render('reset-confirmation');
+
+app.get("/reset-password/:id/:token", (req, res, next) => {
+  const { id, token } = req.params;
+
+  if (id !== user.id) {
+    res.send("invalid id");
+    return;
+  }
+
+  const secret = JWT_SECRET + user.password;
+  try {
+    const payload = jwt.verify(token, secret);
+    res.render("reset-password", { email: user.email });
+  } catch (error) {
+    console.log(error.message);
+    res.send("session expired");
+  }
 });
+app.post("/reset-password/:id/:token", (req, res, next) => {
+  const { id, token } = req.params;
+  const { password, password2 } = req.body;
 
-app.get('/reset-password/:id/:token', (req, res, next) =>{
-    const { id, token } = req.params;
-    
- 
-    if(id !== user.id){
-        res.send('invalid id');
-        return;
-    }
- 
-    const secret = JWT_SECRET + user.password;
-    try{
-        const payload = jwt.verify(token, secret);
-        res.render('reset-password', {email: user.email});   
-    }catch(error){
-        console.log(error.message);
-        res.send('session expired');
-    }
+  if (id !== user.id) {
+    res.send("invalid id");
+    return;
+  }
 
-});
-app.post('/reset-password/:id/:token', (req, res, next) =>{
-    const { id, token } = req.params;
-    const {password, password2} = req.body;
-   
-    if(id !== user.id){
-        res.send('invalid id');
-        return;
-    }
-    
-    const secret = JWT_SECRET + user.password;
-    try{
-        const payload = jwt.verify(token, secret);
-        
+  const secret = JWT_SECRET + user.password;
+  try {
+    const payload = jwt.verify(token, secret);
 
-        user.password = password;
-        res.send(user);
-    }catch(error){
-        console.log(error.message);
-        res.send(error.message);
-    }
+    user.password = password;
+    res.send(user);
+  } catch (error) {
+    console.log(error.message);
+    res.send(error.message);
+  }
 });
 //initializing ports
 const PORT = process.env.PORT || 5000;
