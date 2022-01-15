@@ -11,14 +11,14 @@
     <title>Sign in & Sign up Form</title>
   </head>
   <body>
-<!--     <div class="container">
+    <div class="container">
       <div class="forms-container">
         <div class="signin-signup">
-          <form action="/home" class="sign-in-form" method="GET">
+          <form action="/" class="sign-in-form" method="POST">
             <h2 class="title">Sign in</h2>
             <div class="input-field">
               <i class="fas fa-envelope"></i>
-              <input type="text" placeholder="Email" required name="email" />
+              <input type="text" id="email" placeholder="Email" required name="email" />
             </div>
             -
             <div class="input-field">
@@ -28,6 +28,7 @@
                 placeholder="Password"
                 required
                 name="password"
+                id="password"
               />
             </div>
             <input type="submit" value="Login" class="btn solid" />
@@ -81,9 +82,9 @@
           <img src="img/register.svg" class="image" alt="" />
         </div>
       </div>
-    </div> -->
+    </div>
 
-    <form action="/" method="POST">
+<!--     <form action="/" method="POST">
       <div class="username">
         <input type="text " id="email" name="email" required />
         <label for="email ">email:</label>
@@ -94,7 +95,7 @@
         <label for="password ">Password:</label>
       </div>
       <button type="submit"><span>Login</span></button>
-    </form>
+    </form> -->
   </body>
   <script src="../js/land.js"></script>
 </html>

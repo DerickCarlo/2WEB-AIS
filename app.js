@@ -74,7 +74,7 @@ con.connect((err) => {
     console.log(err);
   }
 });
-
+/* 
 con.query(
   "INSERT INTO coa (classification, accountName, code, mapping, description, normalBalance, action) VALUES (?,?,?,?,?,?,?);",
   [1, 2, 3, 4, 5, 6, 7],
@@ -83,7 +83,7 @@ con.query(
     console.log("inserted");
   }
 );
-
+ */
 //webpage routes
 
 /* Logout */
