@@ -108,25 +108,6 @@ app.post("/", notAuth, function (req, res) {
     [email],
     async (err, result) => {
       if (err) throw err;
-      /* if (result.length == 0) {
-        console.log("email does not exist");
-        res.redirect("/");
-      }
-      userPassword = result[0].password;
-      var isMatch = await bcrypt.compare(password, userPassword);
-      if (!isMatch) {
-        console.log("password is wrong");
-        res.redirect("/");
-      } else {
-        req.session.isAuth = true;
-        req.session.name = result[0].name;
-        if (result[0].role == "admin") {
-          req.session.user = "admin";
-        } else req.session.user = "regular";
-
-        res.redirect("/home");
-      } */
-
       if (result.length == 0) {
         /* email not in database */
         console.log("email does not exist");
@@ -138,7 +119,7 @@ app.post("/", notAuth, function (req, res) {
         if (!isMatch) {
           /* Then if its not a match */
           console.log("password is wrong");
-          res.redirect("/");
+          res.render("/");
         } else {
           /* if its a match */
           req.session.isAuth = true;
@@ -194,17 +175,23 @@ app.post("/register", function (req, res) {
 app.get("/home", isAuth, theseRoles(), function (req, res) {
   console.log("user role: " + req.session.user);
   console.log("user name: " + req.session.name);
-  res.render("home", { username: req.session.name });
+  res.render("home", { username: req.session.name, role: req.session.user });
 });
 
 /* Journal */
 app.get("/journal", isAuth, theseRoles(), function (req, res) {
-  res.render("journal-entry", { username: req.session.name });
+  res.render("journal-entry", {
+    username: req.session.name,
+    role: req.session.user,
+  });
 });
 
 /* Trial Balance */
 app.get("/trial-balance", isAuth, theseRoles(), function (req, res) {
-  res.render("trial-balance", { username: req.session.name });
+  res.render("trial-balance", {
+    username: req.session.name,
+    role: req.session.user,
+  });
 });
 
 /* System user */
@@ -213,7 +200,11 @@ app.get("/system-user", isAuth, requireRole("admin"), function (req, res) {
     if (err) throw err;
     console.log("query successful");
     console.log(result.length);
-    res.render("sys-users", { username: req.session.name, data: result });
+    res.render("sys-users", {
+      username: req.session.name,
+      role: req.session.user,
+      data: result,
+    });
   });
 });
 
@@ -225,6 +216,7 @@ app.get("/coa", isAuth, theseRoles("regular", "admin"), function (req, res) {
     console.log(result.length);
     res.render("chart-of-accounts", {
       username: req.session.name,
+      role: req.session.user,
       data: result,
     });
   });
@@ -236,7 +228,10 @@ app.get(
   isAuth,
   theseRoles("regular", "admin"),
   function (req, res) {
-    res.render("tax-rep", { username: req.session.name });
+    res.render("tax-rep", {
+      username: req.session.name,
+      role: req.session.user
+    });
   }
 );
 

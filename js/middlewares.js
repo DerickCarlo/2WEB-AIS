@@ -2,7 +2,7 @@ const isAuth = (req, res, next) => {
   if (req.session.isAuth) {
     next();
   } else {
-    res.redirect("/home");
+    res.redirect("/");
   }
 };
 
@@ -10,7 +10,7 @@ const notAuth = (req, res, next) => {
   if (!req.session.isAuth) {
     next();
   } else {
-    res.redirect("/");
+    res.redirect("/home");
   }
 };
 
