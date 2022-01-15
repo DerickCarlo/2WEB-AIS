@@ -1,3 +1,4 @@
+/* User must be authenticated */
 const isAuth = (req, res, next) => {
   if (req.session.isAuth) {
     next();
@@ -6,6 +7,7 @@ const isAuth = (req, res, next) => {
   }
 };
 
+/* User must be not authenticated */
 const notAuth = (req, res, next) => {
   if (!req.session.isAuth) {
     next();
@@ -14,6 +16,7 @@ const notAuth = (req, res, next) => {
   }
 };
 
+/* 2 roles to access the page */
 function theseRoles() {
   return function (req, res, next) {
     if (req.session.user === "regular" || req.session.user === "admin") {
@@ -24,6 +27,7 @@ function theseRoles() {
   };
 }
 
+/* 1 role to access the page */
 function requireRole(role) {
   return function (req, res, next) {
     if (req.session.user === role) {

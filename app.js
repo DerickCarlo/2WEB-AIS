@@ -119,7 +119,7 @@ app.post("/", notAuth, function (req, res) {
         if (!isMatch) {
           /* Then if its not a match */
           console.log("password is wrong");
-          res.render("/");
+          res.redirect("/");
         } else {
           /* if its a match */
           req.session.isAuth = true;
@@ -199,7 +199,6 @@ app.get("/system-user", isAuth, requireRole("admin"), function (req, res) {
   con.query("SELECT * FROM users", (err, result) => {
     if (err) throw err;
     console.log("query successful");
-    console.log(result.length);
     res.render("sys-users", {
       username: req.session.name,
       role: req.session.user,
@@ -212,8 +211,6 @@ app.get("/system-user", isAuth, requireRole("admin"), function (req, res) {
 app.get("/coa", isAuth, theseRoles("regular", "admin"), function (req, res) {
   con.query("SELECT * FROM  coa", (err, result) => {
     if (err) throw err;
-    console.log("query successful");
-    console.log(result.length);
     res.render("chart-of-accounts", {
       username: req.session.name,
       role: req.session.user,
