@@ -117,7 +117,7 @@ app.post("/", notAuth, function (req, res) {
         res.redirect("/");
       } else {
         req.session.isAuth = true;
-
+        req.session.name = result[0].name;
         if (result[0].role == "admin") {
           req.session.user = "admin";
         } else req.session.user = "regular";
@@ -163,20 +163,23 @@ app.post("/register", function (req, res) {
   );
 });
 
+/* -------------------------------------------------------------------- */
+
 /* Home */
 app.get("/home", isAuth, theseRoles(), function (req, res) {
-  console.log(req.session.user);
-  res.render("home");
+  console.log('user role: ' + req.session.user);
+  console.log('user name: ' + req.session.name);
+  res.render("home", {username: req.session.name});
 });
 
 /* Journal */
 app.get("/journal", isAuth, theseRoles(), function (req, res) {
-  res.render("journal-entry");
+  res.render("journal-entry", {username: req.session.name});
 });
 
 /* Trial Balance */
 app.get("/trial-balance", isAuth, theseRoles(), function (req, res) {
-  res.render("trial-balance");
+  res.render("trial-balance", {username: req.session.name});
 });
 
 /* System user */
@@ -185,7 +188,7 @@ app.get("/system-user", isAuth, requireRole("admin"), function (req, res) {
     if (err) throw err;
     console.log("query successful");
     console.log(result.length);
-    res.render("sys-users", { data: result });
+    res.render("sys-users", { username: req.session.name, data: result });
   });
 });
 
@@ -195,7 +198,7 @@ app.get("/coa", isAuth, theseRoles("regular", "admin"), function (req, res) {
     if (err) throw err;
     console.log("query successful");
     console.log(result.length);
-    res.render("chart-of-accounts", { data: result });
+    res.render("chart-of-accounts", { username: req.session.name, data: result });
   });
 });
 
