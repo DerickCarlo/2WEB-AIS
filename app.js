@@ -75,6 +75,7 @@ con.connect((err) => {
   }
 });
 
+/* 
 con.query(
   "INSERT INTO coa (classification, accountName, code, mapping, description, normalBalance, action) VALUES (?,?,?,?,?,?,?);",
   [1, 2, 3, 4, 5, 6, 7],
@@ -83,9 +84,11 @@ con.query(
     console.log("inserted");
   }
 );
+ */
 
 //webpage routes
 
+/* Logout */
 app.get("/logout", function (req, res) {
   req.session.destroy((err) => {
     if (err) throw err;
@@ -93,6 +96,7 @@ app.get("/logout", function (req, res) {
   });
 });
 
+/* Login */
 app.get("/", notAuth, function (req, res) {
   res.render("land");
 });
@@ -105,29 +109,32 @@ app.post("/", notAuth, function (req, res) {
     async (err, result) => {
       if (err) throw err;
       if (result.length == 0) {
+        /* email not in database */
         console.log("email does not exist");
         res.redirect("/");
-      }
-      userPassword = result[0].password;
-      var isMatch = await bcrypt.compare(password, userPassword);
-      if (!isMatch) {
-        console.log("password is wrong");
-        res.redirect("/");
       } else {
-        req.session.isAuth = true;
-
-        if (result[0].role == "pao") {
-          req.session.user = "pao";
+        /* else then it does exist then */
+        userPassword = result[0].password;
+        var isMatch = await bcrypt.compare(password, userPassword);
+        if (!isMatch) {
+          /* Then if its not a match */
+          console.log("password is wrong");
+          res.render("/");
+        } else {
+          /* if its a match */
+          req.session.isAuth = true;
+          req.session.name = result[0].name;
+          if (result[0].role == "admin") {
+            req.session.user = "admin";
+          } else req.session.user = "regular";
+          res.redirect("/home");
         }
-        if (result[0].role == "admin") {
-          req.session.user = "admin";
-        }
-        res.redirect("/home");
       }
     }
   );
 });
 
+/* Register */
 app.get("/register", function (req, res) {
   res.render("register");
 });
@@ -162,39 +169,71 @@ app.post("/register", function (req, res) {
   );
 });
 
-app.get("/home", isAuth, requireRole("admin"), function (req, res) {
-  res.render("home");
+/* -------------------------------------------------------------------- */
+
+/* Home */
+app.get("/home", isAuth, theseRoles(), function (req, res) {
+  console.log("user role: " + req.session.user);
+  console.log("user name: " + req.session.name);
+  res.render("home", { username: req.session.name, role: req.session.user });
 });
 
-app.get("/journal", function (req, res) {
-  res.render("journal-entry");
+/* Journal */
+app.get("/journal", isAuth, theseRoles(), function (req, res) {
+  res.render("journal-entry", {
+    username: req.session.name,
+    role: req.session.user,
+  });
 });
 
-app.get("/trial-balance", function (req, res) {
-  res.render("trial-balance");
+/* Trial Balance */
+app.get("/trial-balance", isAuth, theseRoles(), function (req, res) {
+  res.render("trial-balance", {
+    username: req.session.name,
+    role: req.session.user,
+  });
 });
 
-app.get("/system-user", function (req, res) {
+/* System user */
+app.get("/system-user", isAuth, requireRole("admin"), function (req, res) {
   con.query("SELECT * FROM users", (err, result) => {
     if (err) throw err;
     console.log("query successful");
     console.log(result.length);
-    res.render("sys-users", { data: result });
+    res.render("sys-users", {
+      username: req.session.name,
+      role: req.session.user,
+      data: result,
+    });
   });
 });
 
-app.get("/coa", function (req, res) {
+/* COA */
+app.get("/coa", isAuth, theseRoles("regular", "admin"), function (req, res) {
   con.query("SELECT * FROM  coa", (err, result) => {
     if (err) throw err;
     console.log("query successful");
     console.log(result.length);
-    res.render("chart-of-accounts", { data: result });
+    res.render("chart-of-accounts", {
+      username: req.session.name,
+      role: req.session.user,
+      data: result,
+    });
   });
 });
 
-app.get("/tax-report", function (req, res) {
-  res.render("tax-rep");
-});
+/* Tax report */
+app.get(
+  "/tax-report",
+  isAuth,
+  theseRoles("regular", "admin"),
+  function (req, res) {
+    res.render("tax-rep", {
+      username: req.session.name,
+      role: req.session.user
+    });
+  }
+);
 
 //initializing ports
 const PORT = process.env.PORT || 5000;
