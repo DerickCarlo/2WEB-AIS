@@ -167,19 +167,19 @@ app.post("/register", function (req, res) {
 
 /* Home */
 app.get("/home", isAuth, theseRoles(), function (req, res) {
-  console.log('user role: ' + req.session.user);
-  console.log('user name: ' + req.session.name);
-  res.render("home", {username: req.session.name});
+  console.log("user role: " + req.session.user);
+  console.log("user name: " + req.session.name);
+  res.render("home", { username: req.session.name });
 });
 
 /* Journal */
 app.get("/journal", isAuth, theseRoles(), function (req, res) {
-  res.render("journal-entry", {username: req.session.name});
+  res.render("journal-entry", { username: req.session.name });
 });
 
 /* Trial Balance */
 app.get("/trial-balance", isAuth, theseRoles(), function (req, res) {
-  res.render("trial-balance", {username: req.session.name});
+  res.render("trial-balance", { username: req.session.name });
 });
 
 /* System user */
@@ -198,7 +198,10 @@ app.get("/coa", isAuth, theseRoles("regular", "admin"), function (req, res) {
     if (err) throw err;
     console.log("query successful");
     console.log(result.length);
-    res.render("chart-of-accounts", { username: req.session.name, data: result });
+    res.render("chart-of-accounts", {
+      username: req.session.name,
+      data: result,
+    });
   });
 });
 
@@ -208,7 +211,7 @@ app.get(
   isAuth,
   theseRoles("regular", "admin"),
   function (req, res) {
-    res.render("tax-rep");
+    res.render("tax-rep", { username: req.session.name });
   }
 );
 
